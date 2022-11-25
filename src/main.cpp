@@ -38,7 +38,7 @@ inline void brexit(const char *what);
 int main(int argc, char **argv) {
 	for(int i = 1; i < argc; i++) {
 		if(!strcmp(argv[i], "-h") || !strcmp(argv[i], "--help")) {
-			std::cout << "\nINFO:\n\tUSAGE:\t" << argv[0] << " [c(ipher)|d(ecipher)] [shift (1-25)] [\"text here\"]\n" << std::endl;
+			std::cout << "\nINFO:\n\tUSAGE:\t" << argv[0] << " [l|r] [shift (1-25)] [\"text here\"]\n" << std::endl;
 			return 255;
 		}
 	}
