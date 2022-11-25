@@ -10,8 +10,8 @@
 #include <stdio.h>
 
 enum action_t : char {
-	CIPHER = 'c',
-	DECIPHER = 'd'
+	RIGHT = 'r',
+	LEFT = 'l'
 };
 
 /**
@@ -54,14 +54,14 @@ int main(int argc, char **argv) {
 			action = argv[1][0];
 		} else {
 			if(nPipe) {
-				std::cout << "Enter action: (c - cipher, d - decipher) ";
+				std::cout << "Enter action: (r - [right cipher], l - [left cipher]) ";
 				std::cout.flush();
 			}
 			std::cin >> action;
 		}
 
-		if(action != CIPHER && action != DECIPHER)
-			throw std::runtime_error("Action parameter can only be c(ipher) or d(ecipher)");
+		if(action != RIGHT && action != LEFT)
+			throw std::runtime_error("Action parameter can only be l(eft cipher) or r(ight cipher)");
 		
 		
 		if(argc > 2) {
@@ -84,7 +84,7 @@ int main(int argc, char **argv) {
 			text = argv[3];
 		} else {
 			if(nPipe) {
-				std::cout << "Text to " << (action == CIPHER ? "" : "de") << "cipher: ";
+				std::cout << "Text to [de]cipher (" << (action == RIGHT ? "right" : "left") << " cipher): ";
 				std::cout.flush();
 
 				std::cin >> text;
@@ -95,7 +95,7 @@ int main(int argc, char **argv) {
 			}
 		}
 
-		std::cout << caesar(shift * (action == CIPHER ? 1 : -1), text);
+		std::cout << caesar(shift * (action == RIGHT ? 1 : -1), text);
 
 		if(isNotPipeOut())
 			std::cout << std::endl;
@@ -118,7 +118,7 @@ char charCaesar(char firstChar, char i, int shift) {
 	if(shift < 0 && index < 0)
 		index = 26 + index;
 	else
-		index %= 25;
+		index %= 26;
 
 	return firstChar + index;
 }
